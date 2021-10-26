@@ -1,0 +1,24 @@
+name: Build Image
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: x86_64-unknown-linux-musl
+          default: true
+          override: true
+      - uses: actions-rs/cargo@v1
+        with:
+          use-cross: true
+          command: build
+          args: --target x86_64-unknown-linux-musl --release
+      - run: cp target/x86_64-unknown-linux-musl/release/lambda-aws-sso-google-sync bootstrap
+      - run: strip bootstrap
+      - uses: actions/upload-artifact@v2
+        with:
+          name: lambda-zip
+          path: bootstrap
