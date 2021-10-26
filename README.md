@@ -70,11 +70,11 @@ them either with the Event that is send to the lambda, or via environment variab
 ```json
 {
     "security_hub_google_creds": {
-        "region": "eu-central-1",
+        "region": "<region_of_secret>",
         "id": "<google_secret_name>"
     },
     "security_hub_scim_creds": {
-        "region": "eu-central-1",
+        "region": "<region_of_secret>",
         "id": "<scim_secret_name>"
     },
     // Optional, remove if not required. Example: `email:aws-*`
@@ -105,8 +105,8 @@ them either with the Event that is send to the lambda, or via environment variab
 
 ### Environment Variables
 ```sh
-SH_GOOGLE_CREDS="{\"region\": \"eu-central-1\",\"id\": \"<google_secret_name>\"}"
-SH_SCIM_CREDS="{\"region\": \"eu-central-1\",\"id\": \"<scim_secret_name>\"}"
+SH_GOOGLE_CREDS="{\"region\": \"<region_of_secret>\",\"id\": \"<google_secret_name>\"}"
+SH_SCIM_CREDS="{\"region\": \"<region_of_secret>\",\"id\": \"<scim_secret_name>\"}"
 # Optional, skip if not required. Example: `email:aws-*`
 # Query send via Google API to filter users
 # More Infos at https://developers.google.com/admin-sdk/directory/v1/guides/search-users

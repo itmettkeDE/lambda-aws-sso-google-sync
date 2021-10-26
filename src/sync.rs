@@ -180,11 +180,11 @@ impl<'a> SyncOp<'a> {
             .aws_group_lookup
             .iter()
             .filter(|(id, _)| !self.google_group_lookup.contains_key(*id))
-            .map(|(id, u)| (id.clone(), u.display_name.clone()))
+            .filter_map(|(id, u)| Some((id.clone(), u.display_name.clone(), u.id.as_ref()?.clone())))
             .collect::<Vec<_>>();
-        for (id, display_name) in to_delete {
+        for (id, display_name, aws_id) in to_delete {
             log::info!("Deleting group: {}", display_name);
-            self.scim.delete_group(&id).await?;
+            self.scim.delete_group(&aws_id).await?;
             let _ = self.aws_group_lookup.remove(&id);
         }
         Ok(())
@@ -245,11 +245,11 @@ impl<'a> SyncOp<'a> {
             .aws_user_lookup
             .iter()
             .filter(|(id, _)| !self.google_user_lookup.contains_key(*id))
-            .map(|(id, u)| (id.clone(), u.user_name.clone()))
+            .filter_map(|(id, u)| Some((id.clone(), u.user_name.clone(), u.id.as_ref()?.clone())))
             .collect::<Vec<_>>();
-        for (id, user_name) in to_delete {
+        for (id, user_name, aws_id) in to_delete {
             log::info!("Deleting user: {}", user_name);
-            self.scim.delete_user(&id).await?;
+            self.scim.delete_user(&aws_id).await?;
             let _ = self.aws_user_lookup.remove(&id);
         }
         Ok(())

@@ -59,12 +59,12 @@
 //! * Create a CloudWatch Event to trigger the lambda regularly
 //!
 //! # Parameters
-//! 
-//! The lambda function requires a few parameters to correctly work. You can define 
+//!
+//! The lambda function requires a few parameters to correctly work. You can define
 //! them either with the Event that is send to the lambda, or via environment variables.
-//! 
+//!
 //! ## Event
-//! 
+//!
 //! ```json
 //! {
 //!     "security_hub_google_creds": {
@@ -100,7 +100,7 @@
 //!     "sync_strategie": [],
 //! }
 //! ```
-//! 
+//!
 //! ## Environment Variables
 //! ```sh
 //! SH_GOOGLE_CREDS="{\"region\": \"<region_of_secret>\",\"id\": \"<google_secret_name>\"}"
@@ -132,7 +132,7 @@
 //! # Defines the log level
 //! LOG_LEVEL=""
 //! ```
-//! 
+//!
 
 #![warn(
     absolute_paths_not_starting_with_crate,
