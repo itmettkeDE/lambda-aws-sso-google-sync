@@ -1,0 +1,6 @@
+/target
+Cargo.lock
+
+.history/
+*.zip
+run.sh

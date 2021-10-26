@@ -1,0 +1,30 @@
+[package]
+name = "lambda-aws-sso-google-sync"
+version = "0.1.0"
+authors = ["Marc Mettke <marc@itmettke.de>"]
+edition = "2021"
+description = "Syncs Users and Groups from Google Workspace to AWS SSO"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/mettke/lambda-aws-sso-google-sync"
+readme = "./README.md"
+keywords = ["lambda", "aws", "sso", "google", "workspace", "sync"]
+categories = ["command-line-utilities"]
+resolver = "2"
+
+[features]
+test = ["lambda-runtime-types/test"]
+
+[dependencies]
+anyhow = "1.0"
+async-trait = "0.1"
+jsonwebtoken = "7.2"
+lambda-runtime-types = { path = "../lambda-runtime-types" }
+log = "0.4"
+regex = "1.5"
+reqwest = { version = "0.11", features = ["json", "rustls-tls"] }
+rusoto_core = "0.47"
+rusoto_secretsmanager = "0.47"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+simple_logger = "1.13"
+tokio = "1.10"
