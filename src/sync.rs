@@ -180,7 +180,9 @@ impl<'a> SyncOp<'a> {
             .aws_group_lookup
             .iter()
             .filter(|(id, _)| !self.google_group_lookup.contains_key(*id))
-            .filter_map(|(id, u)| Some((id.clone(), u.display_name.clone(), u.id.as_ref()?.clone())))
+            .filter_map(|(id, u)| {
+                Some((id.clone(), u.display_name.clone(), u.id.as_ref()?.clone()))
+            })
             .collect::<Vec<_>>();
         for (id, display_name, aws_id) in to_delete {
             log::info!("Deleting group: {}", display_name);
