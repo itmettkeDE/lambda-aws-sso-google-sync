@@ -1,6 +1,6 @@
 [package]
 name = "lambda-aws-sso-google-sync"
-version = "0.1.3"
+version = "0.1.4"
 authors = ["Marc Mettke <marc@itmettke.de>"]
 edition = "2021"
 description = "Syncs Users and Groups from Google Workspace to AWS SSO"
@@ -27,4 +27,4 @@ rusoto_secretsmanager = "0.47"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 simple_logger = "1.13"
-tokio = "1.12"
+tokio = "1.13"
