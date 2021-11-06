@@ -20,6 +20,6 @@ jobs:
       - run: strip bootstrap
       - uses: actions/upload-artifact@v2
         with:
-          name: lambda-zip
+          name: lambda-aws-sso-google-sync
           path: bootstrap
       - uses: Swatinem/rust-cache@v1
