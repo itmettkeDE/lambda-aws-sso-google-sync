@@ -1,9 +1,17 @@
 {
-    "packageRules": [{
-        "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-        "groupName": "dependencies (non-major)"
-    }],
     "extends": [
-        "config:base"
+      "config:base",
+      "schedule:weekly"
+    ],
+    "packageRules": [
+      {
+        "groupName": "dependencies-non-major",
+        "matchUpdateTypes": [
+          "digest",
+          "minor",
+          "patch",
+          "pin"
+        ]
+      }
     ]
-}
+  }
