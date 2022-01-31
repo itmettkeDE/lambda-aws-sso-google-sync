@@ -601,9 +601,9 @@ dependencies = [
 
 [[package]]
 name = "lambda-runtime-types"
-version = "0.3.3"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5ae3223f912e8803f0311d12fa86d37574ec3361c62337ca581b0f8e1fd469e4"
+checksum = "75169cbc6a1ea2278df67555553653a7a7374662a4159805d9aa6fc52365f274"
 dependencies = [
  "anyhow",
  "async-trait",
