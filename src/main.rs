@@ -204,7 +204,12 @@ struct Runner;
 
 #[async_trait::async_trait]
 impl lambda_runtime_types::Runner<(), event::Event, ()> for Runner {
-    async fn run<'a>(_shared: &'a (), event: event::Event, _region: &'a str, _ctx: lambda_runtime_types::Context) -> anyhow::Result<()> {
+    async fn run<'a>(
+        _shared: &'a (),
+        event: event::Event,
+        _region: &'a str,
+        _ctx: lambda_runtime_types::Context,
+    ) -> anyhow::Result<()> {
         let security_hub_google_creds: google::AdminCreds =
             aws::get_secret_from_secret_manager(event.get_security_hub_google_creds()?.as_ref())
                 .await?;

@@ -107,7 +107,6 @@ pub(crate) struct CredentialJson {
     private_key_id: String,
     private_key: String,
     token_uri: String,
-    auth_uri: String,
     client_email: String,
 }
 
@@ -115,7 +114,6 @@ pub(crate) struct CredentialJson {
 pub(crate) struct Admin<'a> {
     client: reqwest::Client,
     token: String,
-    mail: &'a str,
     domain: &'a str,
 }
 
@@ -143,7 +141,6 @@ impl<'a> Admin<'a> {
         Ok(Self {
             client,
             token,
-            mail: &secret.mail,
             domain,
         })
     }
@@ -302,14 +299,15 @@ impl<'a> Admin<'a> {
 
         let mut entries = std::collections::HashSet::new();
         let mut token: Option<String> = None;
-        let mut query;
+        let mut query: [_; 1] = [("", String::new())];
         loop {
-            let query: &[_] = if let Some(token) = token {
-                query = [("pageToken", token)];
-                &query
-            } else {
-                &[]
-            };
+            let query: &[_] = token.map_or_else(
+                || &[][..],
+                |token| {
+                    query = [("pageToken", token)];
+                    &query
+                },
+            );
             let res = self
                 .client
                 .request(
