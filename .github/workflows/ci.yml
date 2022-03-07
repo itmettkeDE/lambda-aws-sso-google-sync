@@ -24,7 +24,7 @@ jobs:
           args: --target x86_64-unknown-linux-musl --release
       - run: cp target/x86_64-unknown-linux-musl/release/lambda-aws-sso-google-sync bootstrap
       - run: strip bootstrap
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: lambda-aws-sso-google-sync
           path: bootstrap
