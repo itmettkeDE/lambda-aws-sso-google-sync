@@ -646,16 +646,15 @@ dependencies = [
 
 [[package]]
 name = "lambda-runtime-types"
-version = "0.5.0"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0625b2039a0385aaaff28b535735ed6e1df01e1df0cc1be3f2d30d71bc8166cd"
+checksum = "a34c707a85e5f7bbc6673bbef368aaf85a33f8d41f3eadee0056b743d3bce09c"
 dependencies = [
  "anyhow",
  "async-trait",
  "futures",
  "lambda_runtime",
  "log",
- "openssl",
  "serde",
  "serde_json",
  "tokio",
@@ -900,15 +899,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ff011a302c396a5197692431fc1948019154afc178baf7d8e37367442a4601cf"
 
 [[package]]
-name = "openssl-src"
-version = "111.17.0+1.1.1m"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "05d6a336abd10814198f66e2a91ccd7336611f30334119ca8ce300536666fcf4"
-dependencies = [
- "cc",
-]
-
-[[package]]
 name = "openssl-sys"
 version = "0.9.72"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -917,7 +907,6 @@ dependencies = [
  "autocfg",
  "cc",
  "libc",
- "openssl-src",
  "pkg-config",
  "vcpkg",
 ]
