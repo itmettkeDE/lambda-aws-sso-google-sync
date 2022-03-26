@@ -203,31 +203,33 @@ pub(crate) const ENV_VAR_SYNC_STRATEGIE: &str = "SYNC_STRATEGIE";
 struct Runner;
 
 #[async_trait::async_trait]
-impl lambda_runtime_types::Runner<(), event::Event, ()> for Runner {
-    async fn run<'a>(
+impl<'a> lambda_runtime_types::Runner<'a, (), event::Event, ()> for Runner {
+    async fn run(
         _shared: &'a (),
-        event: event::Event,
-        _region: &'a str,
-        _ctx: lambda_runtime_types::Context,
+        event: lambda_runtime_types::LambdaEvent<'a, event::Event>,
     ) -> anyhow::Result<()> {
-        let security_hub_google_creds: google::AdminCreds =
-            aws::get_secret_from_secret_manager(event.get_security_hub_google_creds()?.as_ref())
-                .await?;
-        let security_hub_scim_creds: aws::ScimCreds =
-            aws::get_secret_from_secret_manager(event.get_security_hub_scim_creds()?.as_ref())
-                .await?;
+        let security_hub_google_creds: google::AdminCreds = aws::get_secret_from_secret_manager(
+            event.event.get_security_hub_google_creds()?.as_ref(),
+        )
+        .await?;
+        let security_hub_scim_creds: aws::ScimCreds = aws::get_secret_from_secret_manager(
+            event.event.get_security_hub_scim_creds()?.as_ref(),
+        )
+        .await?;
 
         let scim = aws::Scim::new(&security_hub_scim_creds);
         let gadmin = google::Admin::new(&security_hub_google_creds).await?;
 
-        let mut sync_op = sync::SyncOp::new(&event, &scim, &gadmin).await?;
+        let mut sync_op = sync::SyncOp::new(&event.event, &scim, &gadmin).await?;
         sync_op.sync_groups().await?;
-        sync_op.sync_users(event.get_sync_strategie()?).await?;
+        sync_op
+            .sync_users(event.event.get_sync_strategie()?)
+            .await?;
         sync_op.sync_associations().await?;
         Ok(())
     }
 
-    async fn setup() -> anyhow::Result<()> {
+    async fn setup(_region: &'a str) -> anyhow::Result<()> {
         use anyhow::Context;
         use std::str::FromStr;
 
