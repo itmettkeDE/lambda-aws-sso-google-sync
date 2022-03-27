@@ -1,3 +1,5 @@
+> This Repo is not in use anymore. These functions are now available at https://github.com/itmettkeDE/lambdas
+
 # lambda-aws-sso-google-sync
 
 This tool syncs Users and Groups from Google Workspace to AWS SSO
